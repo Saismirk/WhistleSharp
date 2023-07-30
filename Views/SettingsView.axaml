@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:WhistleSharp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
+             x:Class="WhistleSharp.Views.SettingsView"
+             x:DataType="viewModels:SettingsViewModel">
+    <UserControl.DataContext>
+        <viewModels:SettingsViewModel />
+    </UserControl.DataContext>
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/Styles.xaml" />
+    </UserControl.Styles>
+
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock Text="File Settings" FontSize="12" Padding="20,0,0,3" />
+            <Border BorderThickness="1" BorderBrush="#757575" Padding="20, 6" CornerRadius="10">
+                <Grid ColumnDefinitions="150,*" RowDefinitions="40,40,40,40,40,*">
+                    <TextBlock Classes="Setting" Grid.Row="0" Text="Title" />
+                    <TextBox Name="Title" Classes="Setting" Grid.Column="1" Grid.Row="0" Text="{CompiledBinding Title}" />
+
+                    <TextBlock Classes="Setting" Grid.Row="1" Text="Composer" />
+                    <TextBox Name="Composer" Classes="Setting" Grid.Column="1" Grid.Row="1" Text="{CompiledBinding Composer}" />
+
+                    <TextBlock Classes="Setting" Grid.Row="2" Text="Copyright" />
+                    <TextBox Name="Copyright" Classes="Setting" Grid.Column="1" Grid.Row="2" Text="{CompiledBinding Copyright}" />
+
+                    <TextBlock Classes="Setting" Grid.Row="3" Text="Filename" />
+                    <TextBox Name="Filename" Classes="Setting" Grid.Column="1" Grid.Row="3" Text="{CompiledBinding Filename}" />
+
+                    <TextBlock Classes="Setting" Grid.Row="4" Text="Output Directory" />
+                    <TextBox Name="Output" Classes="Setting" Grid.Column="1" Grid.Row="4" Text="{CompiledBinding OutputDirectory}" />
+                </Grid>
+            </Border>
+            <TextBlock Text="Sheet Settings" FontSize="12" Padding="20,10,0,0" />
+            <Border BorderThickness="1" BorderBrush="#757575" Padding="0,0,0, 5" CornerRadius="10" Margin="0,3,0,10">
+                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                    <TextBlock Classes="Setting" Text="Key:" />
+                    <ComboBox x:Name="KeysComboBox" SelectedIndex="{CompiledBinding SelectedKey, Mode=TwoWay}" Margin="10" HorizontalContentAlignment="Center" />
+
+                    <TextBlock Classes="Setting" Text="Tempo:" />
+                    <TextBox Classes="Setting" Text="{CompiledBinding Tempo, Mode=TwoWay}" 
+                             Name="TempoBox"
+                             HorizontalContentAlignment="Center" />
+
+                    <TextBlock Classes="Setting" Text="Time Signature:" />
+                    <NumericUpDown Minimum="1" FormatString="0" Height="30" Name="TimeSignatureNumerator"
+                                   Value="{CompiledBinding TimeSignatureNumerator, Mode=TwoWay}"
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBlock Text="/" VerticalAlignment="Center"/>
+                    <NumericUpDown Minimum="1" FormatString="0" Height="30" Name="TimeSignatureDenominator"
+                                      Value="{CompiledBinding TimeSignatureDenominator, Mode=TwoWay}"
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

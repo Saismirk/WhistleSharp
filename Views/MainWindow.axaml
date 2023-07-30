@@ -1,0 +1,113 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:WhistleSharp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:WhistleSharp.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="1000"
+        x:Class="WhistleSharp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/icon.ico"
+        Title="WhistleSharp"
+        TransparencyLevelHint="AcrylicBlur"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        CanResize="True"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="40">
+
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Window.Styles>
+        <StyleInclude Source="/Styles/Styles.xaml" />
+    </Window.Styles>
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <Grid RowDefinitions="Auto,*">
+            <!-- Menu toolbar -->
+            <Menu Grid.Row="0" Width="100" HorizontalAlignment="Left">
+                <MenuItem Header="File" Margin="20,0">
+                    <MenuItem Header="Save" Command="{CompiledBinding SaveFileCommand}" HotKey="Ctrl+S" />
+                    <MenuItem Header="Save As" Command="{CompiledBinding SaveAsCommand}" HotKey="Ctrl+D"/>
+                    <MenuItem Header="Load" Command="{CompiledBinding OpenFileCommand}" HotKey="Ctrl+L"/>
+                </MenuItem>
+            </Menu>
+            <TextBlock Name="AppHeader" IsHitTestVisible="False" Text="{CompiledBinding AppHeader, Mode=OneWay}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <DockPanel Grid.Row="1">
+                <Grid RowDefinitions="Auto,10,*" DockPanel.Dock="Left" Margin="0,0,0,10">
+                    <StackPanel>
+                        <Button Classes="PanelMenuButton" Content="Generate" FontSize="20"
+                                Command="{CompiledBinding GenerateCommand}"
+                                CornerRadius="15" Background="#5c5c5c" Margin="10" ClickMode="Release" BorderThickness="0" HorizontalAlignment="Center" />
+                        <Button Classes="PanelMenuButton" Content="Play MIDI" FontSize="20"
+                                Command="{CompiledBinding PlayMidiCommand}"
+                                CornerRadius="15" Background="#5c5c5c" Margin="10" ClickMode="Release" BorderThickness="0" HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Grid.Row="1" Text="Note Reference" FontSize="10" Margin="20,0" />
+                    <DataGrid Grid.Row="2" Margin="10" Name="NoteReferenceTable"
+                              CornerRadius="10"
+                              BorderThickness="2"
+                              Background="Transparent"
+                              BorderBrush="#757575"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              MaxHeight="850"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Top"
+                              GridLinesVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Hole" />
+                            <DataGridTextColumn Header="Note" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <Border VerticalAlignment="Stretch" Background="#757575" BorderBrush="#757575" BorderThickness="0.4" Margin="0,20" />
+
+
+                <Grid DockPanel.Dock="Right" Margin="20,0,20,20" RowDefinitions="*,10,*">
+                    <TabControl>
+                        <TabItem Header="Inputs" FontSize="18">
+                            <ContentControl Content="{CompiledBinding InputViewModel, Mode=TwoWay}" />
+                        </TabItem>
+                        <TabItem Header="Settings" FontSize="18">
+                            <ContentControl Content="{CompiledBinding SettingsViewModel, Mode=TwoWay}" />
+                        </TabItem>
+                    </TabControl>
+                    <GridSplitter Grid.Row="1" Background="Transparent" ResizeDirection="Rows" Height="0.5" 
+                                   BorderThickness="0" />
+                    <Separator Grid.Row="1" />
+                    <Grid Grid.Row="2" RowDefinitions="20,*,60" Margin="0,5,0,0">
+                        <TextBlock Grid.Row="0" Text="Preview" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,15" />
+                        <ScrollViewer Grid.Row="1" DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <Image Name="PreviewImage" />
+                        </ScrollViewer>
+                        <StackPanel Grid.Row="2" Width="110" HorizontalAlignment="Right">
+                            <TextBlock Text="Page" HorizontalAlignment="Center" Margin="0,0,5,10" />
+                            <NumericUpDown Width="110" Text="Page" Value="{CompiledBinding PreviewPage}"
+                                           Maximum="{CompiledBinding PreviewPageCount}" Minimum="1"
+                                           FormatString="0"
+                                           HorizontalContentAlignment="Center"
+                                           Margin="0,0,0,10"
+                                           HorizontalAlignment="Right"
+                                           FlowDirection="LeftToRight" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Panel>
+</Window>
