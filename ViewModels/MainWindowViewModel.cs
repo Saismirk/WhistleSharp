@@ -86,7 +86,7 @@ public class MainWindowViewModel : ViewModelBase {
         SaveAsCommand = ReactiveCommand.CreateFromTask(SaveAs);
         OnPropertyChanged += SetDocumentDirty;
         SettingsViewModel.OnKeyChanged += UpdateNoteReferences;
-        //GeneratePreview(_cancellationTokenSource);
+        GeneratePreview(_cancellationTokenSource);
         UpdateNoteReferences();
     }
 
@@ -117,9 +117,7 @@ public class MainWindowViewModel : ViewModelBase {
                    .OutputPng($"{SettingsViewModel.FileSettings.OutputDirectory}/{SettingsViewModel.FileSettings.Filename}");
     }
 
-    void PlayMidi() {
-        Midi.PlayMidiAsync();
-    }
+    void PlayMidi() => Midi.PlayMidiAsync();
 
     async void GeneratePreview(CancellationTokenSource cts) {
         var previewPaths = GetPreviewImagePaths();
