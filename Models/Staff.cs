@@ -16,7 +16,7 @@ public class Staff {
     public Staff() {
         Midi = false;
         Clef = "\\clef \"treble^8\" ";
-        Key = ("D", "Major");
+        Key = ("D", "major");
         Time = "\\time 4/4";
         Tempo = "90";
         Easy = false;
@@ -63,7 +63,7 @@ public class Staff {
     public string GetStaff() {
         var melody = $@"\fixed bes'' {{
     \once \override TextScript.outside-staff-priority = ##f \textLengthOn
-    \numericTimeSignature \key {ConversionTools.KEY_DICT[Key.Item1]} {Key.Item2.ToLower()} {GetEasyHeadsOn()} {Time} {Clef}
+    \numericTimeSignature \key {ConversionTools.KEY_DICT[Key.Item1]} \{Key.Item2.ToLower()} {GetEasyHeadsOn()} {Time} {Clef}
     {GetMelodyNotes()}
 }}";
         var layout = @"\layout {

@@ -7,11 +7,11 @@ public static class Midi {
     const string SOUNDFONT_PATH = "Resources/sf2/Tin_Whistle_AIR.sf2";
     const string MIDI_PATH = "Temp/preview.mid";
 
-    static bool _isPlaying;
-    static Process _subprocessObject;
-    public static async Task PlayMidiAsync(string midiFilePath = MIDI_PATH, string soundfontPath = SOUNDFONT_PATH) {
+    static bool     _isPlaying;
+    static Process? _subprocessObject;
+    public static async void PlayMidiAsync(string midiFilePath = MIDI_PATH, string soundfontPath = SOUNDFONT_PATH) {
         if (_isPlaying) {
-            _subprocessObject.Kill();
+            _subprocessObject?.Kill();
             _isPlaying = false;
             return;
         }

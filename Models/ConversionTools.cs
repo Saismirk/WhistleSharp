@@ -4,13 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Avalonia;
+using Avalonia.Platform;
 using WhistleSharp.ViewModels;
 
 namespace WhistleSharp.Models;
 
 public static class ConversionTools {
     public const string SEMICIRCLE_PATH =
-        @"\override #'(filled . #t)\path #0 #'((moveto 0 -0.7)(lineto 0 0.7)(curveto 0 0.7 0.7 0.7 0.7 0)(curveto 0.7 0 0.7 -0.7 0-0.7)(closepath))";
+        @"\override #'(filled . #t)\path #0 #'((moveto 0 -0.7)(lineto 0 0.7)(curveto 0 0.7 0.7 0.7 0.7 0)(curveto 0.7 0 0.7 -0.7 0 -0.7)(closepath))";
 
     public const string PLUS_PATH =
         @"\halign #-1.2 \path #0.2 #'((moveto 0.6 0)(lineto -0.6 0)(moveto 0 0.6)(lineto 0 -0.6)) \vspace #-0.4 ";
@@ -18,8 +20,8 @@ public static class ConversionTools {
     public static readonly Dictionary<string, string> KEY_DICT = new() {
         { "D", "d" },
         { "B", "b" },
-        { "Bb", "bes" },
-        { "Eb", "ees" },
+        { "B♭", "bes" },
+        { "E♭", "ees" },
         { "E", "e" },
         { "A", "a" },
         { "F", "f" },
@@ -28,7 +30,7 @@ public static class ConversionTools {
         { "Low F", "f," },
         { "Low C", "c," },
         { "Low D", "d," },
-        { "Loe E", "e," },
+        { "Low E", "e," },
     };
 
     public static readonly Dictionary<string, string> NOTE_DICT = new() {
@@ -52,8 +54,9 @@ public static class ConversionTools {
     };
 
     public static List<TinWhistleKey> GetKeys() {
-        var jsonString = File.ReadAllText("Resources/keys.json");
-        var keys       = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>[]>(jsonString);
+        var assets = AssetLoader.Open(new Uri("avares://WhistleSharp/Assets/keys.json"));
+        var text   = new StreamReader(assets).ReadToEnd();
+        var keys   = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>[]>(text);
         return keys?.Select(key => (TinWhistleKey)key)
                     .ToList()
                ?? new List<TinWhistleKey>();
@@ -153,7 +156,7 @@ public static class ConversionTools {
                 notesList.Add(note);
             }
             catch (KeyNotFoundException) {
-                throw new KeyNotFoundException($"Note {match.Groups[1].Value} is not available in key {key}");
+                // ignored
             }
         }
 
@@ -161,9 +164,8 @@ public static class ConversionTools {
     }
 
     static string TwHole(int filled) {
-        if (filled == -1) {
-            return "\\halign #-1 \\combine " + SEMICIRCLE_PATH + " \\draw-circle #0.7 #0.1 ##f \\vspace #-0.3";
-        }
+        if (filled == -1)
+            return $"\\halign #-1 \\combine {SEMICIRCLE_PATH} \\draw-circle #0.7 #0.1 ##f \\vspace #-0.3";
 
         var filling = filled == 0 ? "##f" : "##t";
         return $"\\halign #-1 \\draw-circle #0.7 #0.1 {filling} \\vspace #-0.35";
