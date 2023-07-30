@@ -8,19 +8,23 @@ WhistleSharp uses a custom notation for Tin Whistle. The notation is based on fi
 
 #### Example Finger notation and their respective notes on a D Whistle:
 
-| Fingering Notation | Key of D Note |
-|--------------------|---------------|
-| 6                  | d             |
-| 5                  | e             |
-| 4                  | f♯            |
-| 3                  | g             |
-| 2                  | a             |
-| 1                  | b             |
-| 0                  | c♯            |
-| 7                  | c             |
-| 8                  | D             |
+| Fingering Notation | Key of D Note        |
+|--------------------|----------------------|
+| 6                  | d                    |
+| 5                  | e                    |
+| 4                  | f♯                   |
+| 3                  | g                    |
+| 2                  | a                    |
+| 1                  | b                    |
+| 0                  | c♯                   |
+| 7                  | c (Special fingering)|
+| 8                  | D                    |
 
 `7` represents the C natural note, while `8` represents the D note special fingering one octave above.
+
+`654321078` will output:
+
+![this](/Resources/Screeshots/s_scale.png)
 
 ### Higher Octave
 
