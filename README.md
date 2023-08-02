@@ -8,17 +8,17 @@ WhistleSharp uses a custom notation for Tin Whistle. The notation is based on fi
 
 #### Example Finger notation and their respective notes on a D Whistle:
 
-| Fingering Notation | Key of D Note        |
-|--------------------|----------------------|
-| 6                  | d                    |
-| 5                  | e                    |
-| 4                  | f♯                   |
-| 3                  | g                    |
-| 2                  | a                    |
-| 1                  | b                    |
-| 0                  | c♯                   |
-| 7                  | c (Special fingering)|
-| 8                  | D                    |
+| Fingering Notation | Key of D Note         |
+|--------------------|-----------------------|
+| 6                  | d                     |
+| 5                  | e                     |
+| 4                  | f♯                    |
+| 3                  | g                     |
+| 2                  | a                     |
+| 1                  | b                     |
+| 0                  | c♯                    |
+| 7                  | c (Special fingering) |
+| 8                  | D                     |
 
 `7` represents the C natural note, while `8` represents the D note special fingering one octave above.
 
@@ -47,6 +47,7 @@ Note duration is represented by adding `q` after the fingering notation. `'` aft
 | q'''''   | Sixty-fourth  |
 
 `.` can be added to make the note dotted.
+
 ## Installation
 
 Currently only Windows is supported. You can download the latest release [here](https://github.com/Saismirk/WhistleSharp/releases).
@@ -76,7 +77,6 @@ The copyright shown at the bottom of the sheet.
 #### Filename
 
 The filename of the sheet. The file will be saved as a `.ly` file and also generate a `.png` of the sheet.
-
 
 #### Output Directory
 
