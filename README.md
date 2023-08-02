@@ -2,6 +2,8 @@
 
 WhistleSharp is a music sheet generation GUI tool for Tin Whistle, based on LilyPond.
 
+![this](/Resources/Screeshots/s_main.png)
+
 ## Notation
 
 WhistleSharp uses a custom notation for Tin Whistle. The notation is based on fingering and whistle key.
