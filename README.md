@@ -24,7 +24,7 @@ WhistleSharp uses a custom notation for Tin Whistle. The notation is based on fi
 
 `7` represents the C natural note, while `8` represents the D note special fingering one octave above.
 
-`654321078` will output:
+`654321708` will output:
 
 ![this](/Resources/Screeshots/s_scale.png)
 
